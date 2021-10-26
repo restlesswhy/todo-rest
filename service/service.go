@@ -1,9 +1,12 @@
 package service
 
-import "github.com/restlesswhy/todo-rest/repository"
+import (
+	todorest "github.com/restlesswhy/todo-rest"
+	"github.com/restlesswhy/todo-rest/repository"
+)
 
 type Authorization interface {
-	
+	CreateUser(user todorest.User) (int, error)
 }
 
 type Todolist interface {
@@ -21,5 +24,7 @@ type Service struct {
 }
 
 func NewService(repo *repository.Repository) *Service {
-	return &Service{}
+	return &Service{
+		Authorization: NewAuthSerice(repo.Authorization),
+	}
 }

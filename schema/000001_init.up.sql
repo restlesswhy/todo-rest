@@ -1,0 +1,35 @@
+CREATE TABLE users (
+    id serial not null unique,
+    name varchar(255) not null,
+    username varchar(255) not null unique,
+    password_hash varchar(255) not null
+);
+
+CREATE TABLE lists (
+    id serial not null unique,
+    title varchar(255) not null,
+    decription varchar(255)
+);
+
+CREATE TABLE users_lists (
+    id serial not null unique,
+    user_id int not null,
+    list_id int not null,
+    FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE,
+    FOREIGN KEY (list_id) REFERENCES lists (id) ON DELETE CASCADE
+);
+
+CREATE TABLE items (
+    id serial not null unique,
+    title varchar(255) not null,
+    description varchar(255),
+    done boolean not null default false
+);
+
+CREATE TABLE lists_items (
+    id serial not null unique,
+    list_id int not null,
+    item_id int not null,
+    FOREIGN KEY (list_id) REFERENCES lists (id) ON DELETE CASCADE,
+    FOREIGN KEY (item_id) REFERENCES items (id) ON DELETE CASCADE
+);
