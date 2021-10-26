@@ -2,11 +2,12 @@ package handler
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/restlesswhy/todo-rest/service"
 )
 
 
 type Handler struct {
-	services *service.Servise
+	services *service.Service
 }
 
 func NewHandler(services *service.Service) *Handler {
@@ -18,8 +19,8 @@ func (h *Handler) InitRoutes() *gin.Engine {
 
 	auth := r.Group("/auth")
 		{
-			auth.POST("/sign-up")
-			auth.POST("/sign-in")
+			auth.POST("/sign-up", h.signUp)
+			auth.POST("/sign-in", h.signIn)
 		}
 
 	api := r.Group("/api")
