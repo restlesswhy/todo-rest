@@ -5,5 +5,5 @@ db:
     port: "5432"
     user: "postgres"
     password: "qwerty"
-    dbname: "postgres"
+    dbname: "exezz"
     sslmode: "disable"

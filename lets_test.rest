@@ -1,0 +1,10 @@
+POST http://localhost:8080/auth/sign-up
+Content-Type: application/json
+
+{
+    "name": "german",
+    "username": "exezz",
+    "password": "qwerty"
+}
+
+###

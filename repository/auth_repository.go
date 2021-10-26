@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/jmoiron/sqlx"
-	todorest "github.com/restlesswhy/todo-rest"
+	"github.com/restlesswhy/todo-rest"
 )
 
 type AuthRepository struct {

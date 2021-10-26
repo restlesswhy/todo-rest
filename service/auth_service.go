@@ -1,8 +1,15 @@
 package service
 
 import (
-	todorest "github.com/restlesswhy/todo-rest"
+	"crypto/sha1"
+	"fmt"
+
+	"github.com/restlesswhy/todo-rest"
 	"github.com/restlesswhy/todo-rest/repository"
+)
+
+const (
+	salt = "alisfn7asfy3y987f34984u34"
 )
 
 type AuthService struct {
@@ -14,5 +21,13 @@ func NewAuthSerice(repo repository.Authorization) *AuthService {
 }
 
 func (s *AuthService) CreateUser(user todorest.User) (int, error) {
+	user.Password = s.generatePasswordHash(user.Password)
 	return s.repo.CreateUser(user)
+}
+
+func (s *AuthService) generatePasswordHash(password string) string {
+	hash := sha1.New()
+	hash.Write([]byte(password))
+
+	return fmt.Sprintf("%x", hash.Sum([]byte(salt)))
 }

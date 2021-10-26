@@ -12,11 +12,13 @@ func (h *Handler) signUp(c *gin.Context) {
 
 	if err := c.BindJSON(&user); err != nil {
 		NewErrorResponce(c, http.StatusBadRequest, err.Error())
+		return
 	}
 
 	id, err := h.services.Authorization.CreateUser(user)
 	if err != nil {
 		NewErrorResponce(c, http.StatusInternalServerError, err.Error())
+		return
 	}
 
 	c.JSON(http.StatusOK, map[string]interface{}{
