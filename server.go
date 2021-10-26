@@ -1,8 +1,11 @@
 package todorest
 
 import (
+	"fmt"
 	"net/http"
 	"time"
+
+	"github.com/spf13/viper"
 )
 
 type Server struct {
@@ -19,4 +22,13 @@ func (s *Server) Run(port string, handler http.Handler) error {
 	}
 
 	return s.httpServer.ListenAndServe()
+}
+
+func (s *Server) InitConfig() {
+	viper.SetConfigName("config")
+	viper.AddConfigPath("configs")
+	err := viper.ReadInConfig() // Find and read the config file
+	if err != nil { // Handle errors reading the config file
+		panic(fmt.Errorf("Fatal error config file: %w \n", err))
+	}
 }
