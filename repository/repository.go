@@ -2,11 +2,12 @@ package repository
 
 import (
 	"github.com/jmoiron/sqlx"
-	todorest "github.com/restlesswhy/todo-rest"
+	"github.com/restlesswhy/todo-rest"
 )
 
 type Authorization interface {
 	CreateUser(user todorest.User) (int, error)
+	GetUser(username, password string) (int, error)
 }
 
 type Todolist interface {

@@ -25,7 +25,7 @@ func (h *Handler) InitRoutes() *gin.Engine {
 
 	api := r.Group("/api")
 		{
-			lists := api.Group("/lists")
+			lists := api.Group("/lists", h.UserIdentity)
 				{
 					lists.POST("/", h.createList)
 					lists.GET("/", h.getAllLists)

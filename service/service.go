@@ -1,12 +1,14 @@
 package service
 
 import (
-	todorest "github.com/restlesswhy/todo-rest"
+	"github.com/restlesswhy/todo-rest"
 	"github.com/restlesswhy/todo-rest/repository"
 )
 
 type Authorization interface {
 	CreateUser(user todorest.User) (int, error)
+	GenerateToken(username, password string) (string, error)
+	ParseToken(token string) (int, error)
 }
 
 type Todolist interface {

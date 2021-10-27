@@ -2,9 +2,23 @@ POST http://localhost:8080/auth/sign-up
 Content-Type: application/json
 
 {
-    "name": "german",
+    "name": "lexa",
+    "username": "vol",
+    "password": "qwerty"
+}
+
+###
+
+POST http://localhost:8080/auth/sign-in
+Content-Type: application/json
+
+{
     "username": "exezz",
     "password": "qwerty"
 }
 
+###
+
+POST http://localhost:8080/api/lists
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzUzNzYzNDAsImlhdCI6MTYzNTMzMzE0MCwidXNlcl9pZCI6Mn0.fnDB-AXhATZMp5brfzCVdoCcqcRoUL3MzDyVpI4naA8
 ###

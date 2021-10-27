@@ -27,3 +27,11 @@ func (r *AuthRepository) CreateUser(user todorest.User) (int, error) {
 
 	return id, nil
 }
+
+func (r *AuthRepository) GetUser(username, password string) (int, error) {
+	var id int
+	query := fmt.Sprintf("SELECT id FROM %s WHERE username=$1 and password_hash=$2", userTable)
+	err := r.db.Get(&id, query, username, password)
+
+	return id, err
+}
