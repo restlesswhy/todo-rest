@@ -3,7 +3,7 @@ package todorest
 type List struct {
 	Id          int    `json:"id"`
 	Title       string `json:"title"`
-	Description string `json:"description"`
+	Description string `json:"decription"`
 }
 
 type UserList struct {

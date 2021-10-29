@@ -27,10 +27,6 @@ func (h *Handler) UserIdentity(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, map[string]interface{}{
-		"id": userId,
-	})
-
 	c.Set("userId", userId)
 }
 

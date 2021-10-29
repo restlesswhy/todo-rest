@@ -2,8 +2,8 @@ POST http://localhost:8080/auth/sign-up
 Content-Type: application/json
 
 {
-    "name": "lexa",
-    "username": "vol",
+    "name": "exezz",
+    "username": "exezz",
     "password": "qwerty"
 }
 
@@ -20,5 +20,20 @@ Content-Type: application/json
 ###
 
 POST http://localhost:8080/api/lists
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzUzNzYzNDAsImlhdCI6MTYzNTMzMzE0MCwidXNlcl9pZCI6Mn0.fnDB-AXhATZMp5brfzCVdoCcqcRoUL3MzDyVpI4naA8
+Authorization: Bearer 
 ###
+
+POST http://localhost:8080/api/lists/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzU1NjU5MzgsImlhdCI6MTYzNTUyMjczOCwidXNlcl9pZCI6MX0.VkYxAA9jMQzIvv-wsVDYkaO8Jgn32HKoY8S4QoVX3iE
+Content-Type: application/json
+
+{
+    "title": "about sex",
+    "decription": "..."
+}
+
+###
+
+GET http://localhost:8080/api/lists/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzU1NjU5MzgsImlhdCI6MTYzNTUyMjczOCwidXNlcl9pZCI6MX0.VkYxAA9jMQzIvv-wsVDYkaO8Jgn32HKoY8S4QoVX3iE
+

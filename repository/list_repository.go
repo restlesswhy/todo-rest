@@ -35,3 +35,14 @@ func (r *ListRepository) CreateList(userId int, list todorest.List) (int, error)
 
 	return listId, ts.Commit()
 }
+
+func (r *ListRepository) GetAllLists(UserId int) ([]todorest.List, error) {
+	var lists []todorest.List
+
+	query := fmt.Sprintf("SELECT tl.id, tl.title, tl.description FROM %s tl INNER JOIN %s ul on tl.id=ul.list_id WHERE ul.user_id=$1", todoListTable, userListTable)
+	if err := r.db.Select(&lists, query, UserId); err != nil {
+		return nil, err
+	}
+
+	return lists, nil
+}

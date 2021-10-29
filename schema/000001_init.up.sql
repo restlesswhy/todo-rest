@@ -8,7 +8,7 @@ CREATE TABLE users (
 CREATE TABLE lists (
     id serial not null unique,
     title varchar(255) not null,
-    decription varchar(255)
+    description varchar(255)
 );
 
 CREATE TABLE users_lists (
