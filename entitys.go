@@ -7,7 +7,7 @@ type List struct {
 }
 
 type UserList struct {
-	Id     int
+	Id     int 
 	UserId int
 	ListId int
 }

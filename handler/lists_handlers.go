@@ -1,9 +1,34 @@
 package handler
 
-import "github.com/gin-gonic/gin"
+import (
+	"net/http"
+
+	"github.com/gin-gonic/gin"
+	todorest "github.com/restlesswhy/todo-rest"
+)
 
 func (h *Handler) createList(c *gin.Context) {
-	
+	userId, err := h.GetUserId(c)
+	if err != nil {
+		NewErrorResponce(c, http.StatusBadRequest, err.Error())
+		return
+	}
+
+	var listInput todorest.List
+	if err := c.BindJSON(&listInput); err != nil {
+		NewErrorResponce(c, http.StatusBadRequest, err.Error())
+		return
+	}
+
+	id, err := h.services.Todolist.CreateList(userId, listInput)
+	if err != nil {
+		NewErrorResponce(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	c.JSON(http.StatusOK, map[string]interface{}{
+		"id": id,
+	})
 }
 
 func (h *Handler) getAllLists(c *gin.Context) {
