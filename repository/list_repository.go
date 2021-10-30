@@ -39,10 +39,29 @@ func (r *ListRepository) CreateList(userId int, list todorest.List) (int, error)
 func (r *ListRepository) GetAllLists(UserId int) ([]todorest.List, error) {
 	var lists []todorest.List
 
-	query := fmt.Sprintf("SELECT tl.id, tl.title, tl.description FROM %s tl INNER JOIN %s ul on tl.id=ul.list_id WHERE ul.user_id=$1", todoListTable, userListTable)
+	query := fmt.Sprintf("SELECT tl.id, tl.title, tl.description FROM %s tl INNER JOIN %s ul on tl.id=ul.list_id WHERE ul.user_id=$1", 
+		todoListTable, userListTable)
 	if err := r.db.Select(&lists, query, UserId); err != nil {
 		return nil, err
 	}
 
 	return lists, nil
 }
+
+func (r *ListRepository) GetListById(userId int, idStr int) (todorest.List, error) {
+	var list todorest.List
+
+	query := fmt.Sprintf("SELECT tl.id, tl.title, tl.description FROM %s tl INNER JOIN %s ul on tl.id=ul.list_id WHERE ul.list_id=$1 and ul.user_id=$2", 
+		todoListTable, userListTable)
+	err := r.db.Get(&list, query, idStr, userId)
+
+	return list, err
+}
+
+func (r *ListRepository) DeleteList(userId int, idStr int) error {
+	query := fmt.Sprintf("DELETE FROM %s tl USING %s ul WHERE ul.list_id=tl.id and ul.user_id=$1 and ul.list_id=$2", 
+		todoListTable, userListTable)
+	_, err := r.db.Exec(query, userId, idStr)
+	return err
+}
+
