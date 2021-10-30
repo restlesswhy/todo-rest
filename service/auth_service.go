@@ -4,6 +4,7 @@ import (
 	"crypto/sha1"
 	"errors"
 	"fmt"
+	"os"
 	"time"
 
 	"github.com/dgrijalva/jwt-go"
@@ -14,8 +15,9 @@ import (
 const (
 	salt = "alisfn7asfy3y987f34984u34"
 	tokenTTL = 12 * time.Hour
-	signInKey = "XL<@PDLX<#l;,x"
 )
+
+var signInKey = os.Getenv("SIGNIN_KEY")
 
 type AuthService struct {
 	repo repository.Authorization

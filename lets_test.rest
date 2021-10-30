@@ -35,13 +35,22 @@ Content-Type: application/json
 ###
 
 GET http://localhost:8080/api/lists/
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzU2MjM2MzgsImlhdCI6MTYzNTU4MDQzOCwidXNlcl9pZCI6MX0.g-crLAxBuQAG-dKHyXAtntGH_7gJtF43regYdCRBJpU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzU2NzAwODQsImlhdCI6MTYzNTYyNjg4NCwidXNlcl9pZCI6MX0.qbehKso7wExuO9JFyAdRNq_snU0r7WkWoJMS4vzU9qU
 ###
 
 GET http://localhost:8080/api/lists/2
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzU1NjU5MzgsImlhdCI6MTYzNTUyMjczOCwidXNlcl9pZCI6MX0.VkYxAA9jMQzIvv-wsVDYkaO8Jgn32HKoY8S4QoVX3iE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzU2Njg4ODYsImlhdCI6MTYzNTYyNTY4NiwidXNlcl9pZCI6MX0.xgvj_KDGdRxETWtwztcAK6y46JHR2cB-yUhPzl_xcxg
 
 ###
 DELETE  http://localhost:8080/api/lists/2
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzU2MjM2MzgsImlhdCI6MTYzNTU4MDQzOCwidXNlcl9pZCI6MX0.g-crLAxBuQAG-dKHyXAtntGH_7gJtF43regYdCRBJpU
+###
 
+PUT http://localhost:8080/api/lists/1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzU2Njg4ODYsImlhdCI6MTYzNTYyNTY4NiwidXNlcl9pZCI6MX0.xgvj_KDGdRxETWtwztcAK6y46JHR2cB-yUhPzl_xcxg
+
+{
+    "title": "about children",
+    "description": "aasd"
+}

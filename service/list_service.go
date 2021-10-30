@@ -21,11 +21,14 @@ func (s *ListService) GetAllLists(userId int) ([]todorest.List, error) {
 	return s.repo.GetAllLists(userId)
 }
 
-func (s *ListService) GetListById(userId int, idStr int) (todorest.List, error) {
-	return s.repo.GetListById(userId, idStr)
+func (s *ListService) GetListById(userId int, idList int) (todorest.List, error) {
+	return s.repo.GetListById(userId, idList)
 }
 
-func (s *ListService) DeleteList(userId int, idStr int) error {
-	return s.repo.DeleteList(userId, idStr)
+func (s *ListService) DeleteList(userId int, idList int) error {
+	return s.repo.DeleteList(userId, idList)
 }
 
+func (s *ListService) UpdateList(userId int, idList int, input todorest.UpdateListInput) error {
+	return s.repo.UpdateList(userId, idList, input)
+}

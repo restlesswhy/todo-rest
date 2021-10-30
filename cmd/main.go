@@ -1,6 +1,9 @@
 package main
 
 import (
+	"os"
+
+	"github.com/joho/godotenv"
 	"github.com/restlesswhy/todo-rest"
 	"github.com/restlesswhy/todo-rest/handler"
 	"github.com/restlesswhy/todo-rest/repository"
@@ -12,13 +15,17 @@ import (
 func main() {
 	srv := new(todorest.Server)
 
+	err := godotenv.Load()
+  	if err != nil {
+    	logrus.Fatal("Error loading .env file")
+  	}
 	srv.InitConfig()
 
 	db, err := repository.NewPostgresDB(repository.Config{
 		Host: viper.GetString("db.host"),
 		Port: viper.GetString("db.port"),
 		User: viper.GetString("db.user"),
-		Password: viper.GetString("db.password"),
+		Password: os.Getenv("DB_PASSWORD"),
 		DBName: viper.GetString("db.dbname"),
 		SSLMode: viper.GetString("db.sslmode"),
 	})

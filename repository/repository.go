@@ -13,8 +13,9 @@ type Authorization interface {
 type Todolist interface {
 	CreateList(userId int, list todorest.List) (int, error)
 	GetAllLists(UserId int) ([]todorest.List, error)
-	GetListById(userId int, idStr int) (todorest.List, error)
-	DeleteList(userId int, idStr int) error
+	GetListById(userId int, idList int) (todorest.List, error)
+	DeleteList(userId int, idList int) error
+	UpdateList(userId int, idList int, input todorest.UpdateListInput) error
 }
 
 type Itemlist interface {
