@@ -21,6 +21,7 @@ type Todolist interface {
 
 type Itemlist interface {
 	CreateItem(userId, listId int, itemInput todorest.Item) (int, error)
+	GetAllItems(userId, listId int) ([]todorest.Item, error)
 }
 
 type Service struct {

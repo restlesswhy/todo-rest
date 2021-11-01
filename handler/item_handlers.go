@@ -8,6 +8,10 @@ import (
 	"github.com/restlesswhy/todo-rest"
 )
 
+type getAllItemsResponse struct {
+	Data []todorest.Item `json:"data"`
+}
+
 func (h *Handler) createItem(c *gin.Context) {
 	userId, err := h.GetUserId(c)
 	if err != nil {
@@ -39,7 +43,27 @@ func (h *Handler) createItem(c *gin.Context) {
 }
 
 func (h *Handler) getAllItems(c *gin.Context) {
+	userId, err := h.GetUserId(c)
+	if err != nil {
+		NewErrorResponce(c, http.StatusBadRequest, err.Error())
+		return
+	}
 
+	listId, err := strconv.Atoi(c.Param("id")) 
+	if err != nil {
+		NewErrorResponce(c, http.StatusBadRequest, "invalid list id param")
+		return
+	}
+
+	itemInput, err := h.services.Itemlist.GetAllItems(userId, listId)
+	if err != nil {
+		NewErrorResponce(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	c.JSON(http.StatusOK, getAllItemsResponse{
+		Data: itemInput,
+	})
 }
 
 func (h *Handler) getItemById(c *gin.Context) {

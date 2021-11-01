@@ -19,11 +19,6 @@ Content-Type: application/json
 }
 ###
 
-//Show all list
-POST http://localhost:8080/api/lists
-Authorization: Bearer 
-###
-
 //Create list
 POST http://localhost:8080/api/lists/
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzU1NjU5MzgsImlhdCI6MTYzNTUyMjczOCwidXNlcl9pZCI6MX0.VkYxAA9jMQzIvv-wsVDYkaO8Jgn32HKoY8S4QoVX3iE
@@ -33,6 +28,11 @@ Content-Type: application/json
     "title": "about sex",
     "decription": "whaaaaaa"
 }
+###
+
+//Show all list
+GET http://localhost:8080/api/lists
+Authorization: Bearer 
 ###
 
 //Get list by id
@@ -62,5 +62,11 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzU4MDk5N
 Content-Type: application/json
 
 {
-    "title": "about sex"
+    "title": "do REST",
+    "description": "handlers u know"
 }
+###
+
+//Show all items of some list
+GET  http://localhost:8080/api/lists/1/items
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzU4MDk5NDIsImlhdCI6MTYzNTc2Njc0MiwidXNlcl9pZCI6MX0.z_ZmIrPFXfP9JsZb3U7bz3-b6yR0_SJshqae9othIRk

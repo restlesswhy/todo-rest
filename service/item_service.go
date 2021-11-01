@@ -22,3 +22,12 @@ func (s *ItemService) CreateItem(userId, listId int, itemInput todorest.Item) (i
 
 	return s.itemRepo.CreateItem(listId, itemInput)
 }
+
+func (s *ItemService) GetAllItems(userId, listId int) ([]todorest.Item, error) {
+	_, err := s.listRepo.GetListById(userId, listId)
+	if err != nil {
+		return nil, err
+	}
+
+	return s.itemRepo.GetAllItems(userId, listId)
+}

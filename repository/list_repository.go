@@ -34,6 +34,10 @@ func (r *ListRepository) CreateList(userId int, list todorest.List) (int, error)
 
 	userListQuery := fmt.Sprintf("INSERT INTO %s (user_id, list_id) VALUES ($1, $2)", userListTable)
 	_, err = ts.Exec(userListQuery, userId, listId)
+	if err != nil {
+		ts.Rollback()
+		return 0, err
+	}
 
 	return listId, ts.Commit()
 }
