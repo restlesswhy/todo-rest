@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"os"
 
 	"github.com/joho/godotenv"
@@ -12,14 +13,20 @@ import (
 	"github.com/spf13/viper"
 )
 
-func main() {
-	srv := new(todorest.Server)
+func init() {
+	logrus.SetFormatter(new(logrus.JSONFormatter))
 
-	err := godotenv.Load()
-  	if err != nil {
+  	if err := godotenv.Load(); err != nil {
     	logrus.Fatal("Error loading .env file")
   	}
-	srv.InitConfig()
+
+	if err := InitConfig(); err != nil { // Handle errors reading the config file
+		panic(fmt.Errorf("Fatal error config file: %w \n", err))
+	}
+}
+
+func main() {
+	srv := new(todorest.Server)
 
 	db, err := repository.NewPostgresDB(repository.Config{
 		Host: viper.GetString("db.host"),
@@ -40,4 +47,10 @@ func main() {
 	if err := srv.Run("8080", handler.InitRoutes()); err != nil {
 		logrus.Fatalf("server is not run: %v", err)
 	}
+}
+
+func InitConfig() error{
+	viper.SetConfigName("config")
+	viper.AddConfigPath("configs")
+	return viper.ReadInConfig() // Find and read the config file
 }

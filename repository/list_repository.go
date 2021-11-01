@@ -50,24 +50,24 @@ func (r *ListRepository) GetAllLists(userId int) ([]todorest.List, error) {
 	return lists, nil
 }
 
-func (r *ListRepository) GetListById(userId int, idList int) (todorest.List, error) {
+func (r *ListRepository) GetListById(userId, listId int) (todorest.List, error) {
 	var list todorest.List
 
 	query := fmt.Sprintf("SELECT tl.id, tl.title, tl.description FROM %s tl INNER JOIN %s ul on tl.id=ul.list_id WHERE ul.list_id=$1 and ul.user_id=$2", 
 		todoListTable, userListTable)
-	err := r.db.Get(&list, query, idList, userId)
+	err := r.db.Get(&list, query, listId, userId)
 
 	return list, err
 }
 
-func (r *ListRepository) DeleteList(userId int, idList int) error {
+func (r *ListRepository) DeleteList(userId, listId int) error {
 	query := fmt.Sprintf("DELETE FROM %s tl USING %s ul WHERE ul.list_id=tl.id and ul.user_id=$1 and ul.list_id=$2", 
 		todoListTable, userListTable)
-	_, err := r.db.Exec(query, userId, idList)
+	_, err := r.db.Exec(query, userId, listId)
 	return err
 }
 
-func (r *ListRepository) UpdateList(userId int, idList int, input todorest.UpdateListInput) error {
+func (r *ListRepository) UpdateList(userId, listId int, input todorest.UpdateListInput) error {
 	setValues := make([]string, 0)
 	args := make([]interface{}, 0)
 	argsId := 1
@@ -87,7 +87,7 @@ func (r *ListRepository) UpdateList(userId int, idList int, input todorest.Updat
 	setQuery := strings.Join(setValues, ", ")
 	query := fmt.Sprintf("UPDATE %s tl SET %s FROM %s ul WHERE tl.id = ul.list_id AND ul.user_id = $%d AND ul.list_id = $%d", 
 		todoListTable, setQuery, userListTable, argsId, argsId+1)
-	args = append(args, userId, idList)
+	args = append(args, userId, listId)
 
 	logrus.Debugf("updateQuery = %s", query)
 	logrus.Debugf("args = %s", args)

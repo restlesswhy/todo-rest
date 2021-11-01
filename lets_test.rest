@@ -1,14 +1,15 @@
+//Sign up user
 POST http://localhost:8080/auth/sign-up
 Content-Type: application/json
 
 {
-    "name": "exezz",
-    "username": "exezz",
+    "name": "gera",
+    "username": "gera",
     "password": "qwerty"
 }
-
 ###
 
+//Sign in user
 POST http://localhost:8080/auth/sign-in
 Content-Type: application/json
 
@@ -16,13 +17,14 @@ Content-Type: application/json
     "username": "exezz",
     "password": "qwerty"
 }
-
 ###
 
+//Show all list
 POST http://localhost:8080/api/lists
 Authorization: Bearer 
 ###
 
+//Create list
 POST http://localhost:8080/api/lists/
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzU1NjU5MzgsImlhdCI6MTYzNTUyMjczOCwidXNlcl9pZCI6MX0.VkYxAA9jMQzIvv-wsVDYkaO8Jgn32HKoY8S4QoVX3iE
 Content-Type: application/json
@@ -31,21 +33,19 @@ Content-Type: application/json
     "title": "about sex",
     "decription": "whaaaaaa"
 }
-
 ###
 
-GET http://localhost:8080/api/lists/
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzU2NzAwODQsImlhdCI6MTYzNTYyNjg4NCwidXNlcl9pZCI6MX0.qbehKso7wExuO9JFyAdRNq_snU0r7WkWoJMS4vzU9qU
-###
-
+//Get list by id
 GET http://localhost:8080/api/lists/2
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzU2Njg4ODYsImlhdCI6MTYzNTYyNTY4NiwidXNlcl9pZCI6MX0.xgvj_KDGdRxETWtwztcAK6y46JHR2cB-yUhPzl_xcxg
-
 ###
+
+//Delete list by id
 DELETE  http://localhost:8080/api/lists/2
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzU2MjM2MzgsImlhdCI6MTYzNTU4MDQzOCwidXNlcl9pZCI6MX0.g-crLAxBuQAG-dKHyXAtntGH_7gJtF43regYdCRBJpU
 ###
 
+//Update list by id
 PUT http://localhost:8080/api/lists/1
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzU2Njg4ODYsImlhdCI6MTYzNTYyNTY4NiwidXNlcl9pZCI6MX0.xgvj_KDGdRxETWtwztcAK6y46JHR2cB-yUhPzl_xcxg
@@ -53,4 +53,14 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzU2Njg4O
 {
     "title": "about children",
     "description": "aasd"
+}
+###
+
+//Create item on some list
+POST http://localhost:8080/api/lists/1/items
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzU4MDk5NDIsImlhdCI6MTYzNTc2Njc0MiwidXNlcl9pZCI6MX0.z_ZmIrPFXfP9JsZb3U7bz3-b6yR0_SJshqae9othIRk
+Content-Type: application/json
+
+{
+    "title": "about sex"
 }

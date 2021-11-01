@@ -61,13 +61,13 @@ func (h *Handler) getListById(c *gin.Context) {
 		return
 	}
 
-	idList, err := strconv.Atoi(c.Param("id")) 
+	listId, err := strconv.Atoi(c.Param("id")) 
 	if err != nil {
 		NewErrorResponce(c, http.StatusBadRequest, err.Error())
 		return
 	}
 
-	list, err := h.services.Todolist.GetListById(userId, idList)
+	list, err := h.services.Todolist.GetListById(userId, listId)
 	if err != nil {
 		NewErrorResponce(c, http.StatusInternalServerError, err.Error())
 		return
@@ -83,7 +83,7 @@ func (h *Handler) updateList(c *gin.Context) {
 		return
 	}
 
-	idList, err := strconv.Atoi(c.Param("id")) 
+	listId, err := strconv.Atoi(c.Param("id")) 
 	if err != nil {
 		NewErrorResponce(c, http.StatusBadRequest, err.Error())
 		return
@@ -95,7 +95,7 @@ func (h *Handler) updateList(c *gin.Context) {
 		return
 	}
 
-	if err := h.services.Todolist.UpdateList(userId, idList, input); err != nil {
+	if err := h.services.Todolist.UpdateList(userId, listId, input); err != nil {
 		NewErrorResponce(c, http.StatusInternalServerError, err.Error())
 		return
 	}
@@ -112,13 +112,13 @@ func (h *Handler) deleteList(c *gin.Context) {
 		return
 	}
 
-	idList, err := strconv.Atoi(c.Param("id")) 
+	listId, err := strconv.Atoi(c.Param("id")) 
 	if err != nil {
 		NewErrorResponce(c, http.StatusBadRequest, err.Error())
 		return
 	}
 
-	if err := h.services.Todolist.DeleteList(userId, idList); err != nil {
+	if err := h.services.Todolist.DeleteList(userId, listId); err != nil {
 		NewErrorResponce(c, http.StatusInternalServerError, err.Error())
 		return
 	}
