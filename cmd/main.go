@@ -1,8 +1,11 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"os"
+	"os/signal"
+	"syscall"
 
 	"github.com/joho/godotenv"
 	"github.com/restlesswhy/todo-rest"
@@ -44,9 +47,29 @@ func main() {
 	service := service.NewService(repository)
 	handler := handler.NewHandler(service)
 
-	if err := srv.Run("8080", handler.InitRoutes()); err != nil {
-		logrus.Fatalf("server is not run: %v", err)
+	go func ()  {
+		if err := srv.Run("8080", handler.InitRoutes()); err != nil {
+			logrus.Fatalf("server is not run: %v", err)
+		}
+	}()
+
+	logrus.Print("App started!")
+
+	quit := make(chan os.Signal, 1)
+	signal.Notify(quit, syscall.SIGTERM, syscall.SIGINT)
+	<- quit
+
+	logrus.Print("App shutting down!")
+
+	if err := srv.Shutdown(context.Background()); err != nil {
+		logrus.Errorf("error occured on server shutting down: %s", err.Error())
 	}
+
+	if err := db.Close(); err != nil {
+		logrus.Errorf("error occured on db connection close: %s", err.Error())
+	}
+
+	//TODO: full JWT, error support, makefile, docker compose
 }
 
 func InitConfig() error{
