@@ -6,10 +6,10 @@ import (
 )
 
 type ListService struct {
-	repo repository.Todolist
+	repo repository.List
 }
 
-func NewListService(repo repository.Todolist) *ListService {
+func NewListService(repo repository.List) *ListService {
 	return &ListService{repo: repo}
 }
 
@@ -30,5 +30,8 @@ func (s *ListService) DeleteList(userId int, listId int) error {
 }
 
 func (s *ListService) UpdateList(userId int, listId int, input todorest.UpdateListInput) error {
+	if err := input.Validate(); err != nil {
+		return err
+	}
 	return s.repo.UpdateList(userId, listId, input)
 }

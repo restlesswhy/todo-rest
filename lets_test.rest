@@ -73,10 +73,22 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzYwMDQzM
 ###
 
 //Show items by id
-GET  http://localhost:8080/api/items/4
+GET  http://localhost:8080/api/items/1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzYwODIzNjAsImlhdCI6MTYzNjAzOTE2MCwidXNlcl9pZCI6MX0.8tULgFL5gaMav2UuD_Uzr6SvqqSC8DmD5JTcxRYo35s
 ###
 
 //Delete by id
 DELETE  http://localhost:8080/api/items/4
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzYwODIzNjAsImlhdCI6MTYzNjAzOTE2MCwidXNlcl9pZCI6MX0.8tULgFL5gaMav2UuD_Uzr6SvqqSC8DmD5JTcxRYo35s
+###
+
+//Update by id
+PUT  http://localhost:8080/api/items/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzYwODIzNjAsImlhdCI6MTYzNjAzOTE2MCwidXNlcl9pZCI6MX0.8tULgFL5gaMav2UuD_Uzr6SvqqSC8DmD5JTcxRYo35s
+Content-Type: application/json
+
+{
+    "title": "do SOME",
+    "description": "handlers u sex",
+    "done": false
+}

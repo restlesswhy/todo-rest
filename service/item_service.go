@@ -6,11 +6,11 @@ import (
 )
 
 type ItemService struct {
-	itemRepo repository.Itemlist
-	listRepo repository.Todolist
+	itemRepo repository.Item
+	listRepo repository.List
 }
 
-func NewItemService(itemRepo repository.Itemlist, listRepo repository.Todolist) *ItemService{
+func NewItemService(itemRepo repository.Item, listRepo repository.List) *ItemService{
 	return &ItemService{itemRepo: itemRepo, listRepo: listRepo}
 }
 
@@ -36,6 +36,14 @@ func (s *ItemService) GetItemById(userId, itemId int) (todorest.Item, error) {
 	return s.itemRepo.GetItemById(userId, itemId)
 }
 
-func (s *ItemService) DeleteItem(userId, itemId int) (error) {
+func (s *ItemService) DeleteItem(userId, itemId int) error {
 	return s.itemRepo.DeleteItem(userId, itemId)
 }
+
+func (s *ItemService) UpdateItem(userId, itemId int, input todorest.UpdateItemInput) error {
+	if err := input.Validate(); err != nil {
+		return err
+	}
+	return s.itemRepo.UpdateItem(userId, itemId, input)
+}
+
