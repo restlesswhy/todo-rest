@@ -67,7 +67,26 @@ func (h *Handler) getAllItems(c *gin.Context) {
 }
 
 func (h *Handler) getItemById(c *gin.Context) {
+	userId, err := h.GetUserId(c)
+	if err != nil {
+		NewErrorResponce(c, http.StatusBadRequest, err.Error())
+		return
+	}
 
+	itemId, err := strconv.Atoi(c.Param("id")) 
+	if err != nil {
+		NewErrorResponce(c, http.StatusBadRequest, "invalid list id param")
+		return
+	}
+
+	var input todorest.Item
+	input, err = h.services.Itemlist.GetItemById(userId, itemId)
+	if err != nil {
+		NewErrorResponce(c, http.StatusBadRequest, err.Error())
+		return
+	}
+
+	c.JSON(http.StatusOK, input)
 }
 
 func (h *Handler) updateItem(c *gin.Context) {
@@ -75,5 +94,24 @@ func (h *Handler) updateItem(c *gin.Context) {
 }
 
 func (h *Handler) deleteItem(c *gin.Context) {
+	userId, err := h.GetUserId(c)
+	if err != nil {
+		NewErrorResponce(c, http.StatusBadRequest, err.Error())
+		return
+	}
 
+	itemId, err := strconv.Atoi(c.Param("id")) 
+	if err != nil {
+		NewErrorResponce(c, http.StatusBadRequest, "invalid list id param")
+		return
+	}
+
+	if err := h.services.Itemlist.DeleteItem(userId, itemId); err != nil {
+		NewErrorResponce(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	c.JSON(http.StatusOK, StatusResponce{
+		Status: "ok",
+	})
 }

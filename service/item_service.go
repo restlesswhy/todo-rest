@@ -31,3 +31,11 @@ func (s *ItemService) GetAllItems(userId, listId int) ([]todorest.Item, error) {
 
 	return s.itemRepo.GetAllItems(userId, listId)
 }
+
+func (s *ItemService) GetItemById(userId, itemId int) (todorest.Item, error) {
+	return s.itemRepo.GetItemById(userId, itemId)
+}
+
+func (s *ItemService) DeleteItem(userId, itemId int) (error) {
+	return s.itemRepo.DeleteItem(userId, itemId)
+}
