@@ -7,6 +7,11 @@ import (
 	todorest "github.com/restlesswhy/todo-rest"
 )
 
+type tokenResponce struct {
+	AccesToken string	`json:"accesToken"`
+	RefreshToken string `json:"refreshToken"`
+}
+
 func (h *Handler) signUp(c *gin.Context) {
 	var user todorest.User
 
@@ -39,13 +44,13 @@ func (h *Handler) signIn(c *gin.Context) {
 		return
 	}
 
-	token, err := h.services.Authorization.GenerateToken(user.Username, user.Password)
+	res, err := h.services.Authorization.GenerateToken(user.Username, user.Password)
 	if err != nil {
 		NewErrorResponce(c, http.StatusInternalServerError, err.Error())
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{
-		"token": token,
+	c.JSON(http.StatusOK, tokenResponce{
+		AccesToken: res,
 	})
 }

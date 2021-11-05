@@ -13,12 +13,13 @@ import (
 )
 
 const (
-	salt = "alisfn7asfy3y987f34984u34"
 	tokenTTL = 12 * time.Hour
 )
 
-var signInKey = os.Getenv("SIGNIN_KEY")
-
+var (
+	signInKey = os.Getenv("SIGNIN_KEY")
+	salt = os.Getenv("SALT")
+)
 type AuthService struct {
 	repo repository.Authorization
 }

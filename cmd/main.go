@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"fmt"
 	"os"
 	"os/signal"
 	"syscall"
@@ -24,7 +23,7 @@ func init() {
   	}
 
 	if err := InitConfig(); err != nil { // Handle errors reading the config file
-		panic(fmt.Errorf("Fatal error config file: %w \n", err))
+		logrus.Fatal("Fatal error config file: %w \n", err)
 	}
 }
 
@@ -68,8 +67,6 @@ func main() {
 	if err := db.Close(); err != nil {
 		logrus.Errorf("error occured on db connection close: %s", err.Error())
 	}
-
-	//TODO: full JWT, error support, makefile, docker compose
 }
 
 func InitConfig() error{
@@ -77,3 +74,5 @@ func InitConfig() error{
 	viper.AddConfigPath("configs")
 	return viper.ReadInConfig() // Find and read the config file
 }
+
+//TODO: full JWT, error support, makefile, docker compose, comments, TESTS
