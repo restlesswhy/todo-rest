@@ -1,8 +1,10 @@
 port: "8080"
 
 db:
-    host: "localhost"
+    host: "db"
     port: "5432"
     user: "postgres"
-    dbname: "exezz"
+    dbname: "postgres"
     sslmode: "disable"
+
+signinkey: "XL<@PDLX<#l;,x"

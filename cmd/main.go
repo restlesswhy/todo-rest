@@ -8,9 +8,9 @@ import (
 
 	"github.com/joho/godotenv"
 	"github.com/restlesswhy/todo-rest"
-	"github.com/restlesswhy/todo-rest/handler"
-	"github.com/restlesswhy/todo-rest/repository"
-	"github.com/restlesswhy/todo-rest/service"
+	"github.com/restlesswhy/todo-rest/pkg/handler"
+	"github.com/restlesswhy/todo-rest/pkg/repository"
+	"github.com/restlesswhy/todo-rest/pkg/service"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
 )

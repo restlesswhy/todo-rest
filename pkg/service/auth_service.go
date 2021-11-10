@@ -4,22 +4,23 @@ import (
 	"crypto/sha1"
 	"errors"
 	"fmt"
-	"os"
 	"time"
 
 	"github.com/dgrijalva/jwt-go"
 	"github.com/restlesswhy/todo-rest"
-	"github.com/restlesswhy/todo-rest/repository"
+	"github.com/restlesswhy/todo-rest/pkg/repository"
+	"github.com/spf13/viper"
 )
 
 const (
 	tokenTTL = 12 * time.Hour
+	salt = "LAKSjdlaskjd;LAJSDk;:L:>"
 )
 
 var (
-	signInKey = os.Getenv("SIGNIN_KEY")
-	salt = os.Getenv("SALT")
+	signInKey = viper.GetString("signinkey")
 )
+
 type AuthService struct {
 	repo repository.Authorization
 }

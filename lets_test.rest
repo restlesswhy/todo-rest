@@ -3,8 +3,8 @@ POST http://localhost:8080/auth/sign-up
 Content-Type: application/json
 
 {
-    "name": "gera",
-    "username": "gera",
+    "name": "exezz",
+    "username": "exezz",
     "password": "qwerty"
 }
 ###

@@ -2,7 +2,7 @@ package service
 
 import (
 	todorest "github.com/restlesswhy/todo-rest"
-	"github.com/restlesswhy/todo-rest/repository"
+	"github.com/restlesswhy/todo-rest/pkg/repository"
 )
 
 type ItemService struct {
